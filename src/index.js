@@ -1,15 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useParams
+} from "react-router-dom";
 import './index.css';
-import App from './App';
+import App from './app/App';
 import store from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+import Echo from './features/echo/Echo';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+        <Router>
+          <Switch>
+            <Route path="/home">
+              <App />
+            </Route>
+            <Route path="/fetching/:fid">
+              <Echo />
+            </Route>
+            </Switch>
+          </Router>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
